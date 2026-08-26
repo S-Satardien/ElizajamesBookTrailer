@@ -813,7 +813,7 @@
                 <span>💬 Review & Feedback Mode Active</span>
             </div>
             <div style="font-family: 'Cinzel', serif; font-size: 0.82rem; color: var(--gold-light); letter-spacing: 2px;">
-                ELIZA JAMES • REACH PUBLISHERS
+                ELIZA JAMES • CHAKRA ENERGETICS
             </div>
         </div>
     </header>
@@ -1914,26 +1914,26 @@
             ctx.shadowBlur = 0;
             ctx.fillText(`${chakra.id}`, 0, 2);
 
-            // Dynamic Box Sizing
+            // Sleek High-Contrast Label Capsule
             const tagY = radius + 46;
 
             ctx.font = '700 19px "Cinzel", serif';
             const nameWidth = ctx.measureText(chakra.name.toUpperCase()).width;
-            ctx.font = 'italic 600 15px "Cormorant Garamond", serif';
+            ctx.font = 'italic 600 16px "Cormorant Garamond", serif';
             const sanskritWidth = ctx.measureText(chakra.sanskrit).width;
 
-            const requiredW = Math.max(nameWidth, sanskritWidth, 130) + 30;
+            const requiredW = Math.max(nameWidth, sanskritWidth, 130) + 36;
             const boxW = Math.max(requiredW, 180);
-            const boxH = 78;
+            const boxH = 62;
 
             ctx.save();
-            ctx.fillStyle = 'rgba(10, 14, 24, 0.88)';
+            ctx.fillStyle = 'rgba(10, 14, 24, 0.9)';
             ctx.strokeStyle = chakra.color;
-            ctx.lineWidth = 1.8;
+            ctx.lineWidth = 2.0;
             ctx.shadowColor = chakra.glow;
-            ctx.shadowBlur = 12;
+            ctx.shadowBlur = 14;
             ctx.beginPath();
-            ctx.roundRect(-boxW * 0.5, tagY - 14, boxW, boxH, 12);
+            ctx.roundRect(-boxW * 0.5, tagY - 12, boxW, boxH, 12);
             ctx.fill();
             ctx.stroke();
             ctx.restore();
@@ -1942,18 +1942,12 @@
             ctx.fillStyle = '#fff0a8';
             ctx.shadowColor = '#d4af37';
             ctx.shadowBlur = 12;
-            ctx.fillText(chakra.name.toUpperCase(), 0, tagY + 6);
+            ctx.fillText(chakra.name.toUpperCase(), 0, tagY + 10);
 
-            ctx.font = 'italic 600 15px "Cormorant Garamond", serif';
+            ctx.font = 'italic 600 16px "Cormorant Garamond", serif';
             ctx.fillStyle = '#ffffff';
             ctx.shadowBlur = 0;
-            ctx.fillText(chakra.sanskrit, 0, tagY + 29);
-
-            ctx.font = '700 13px "Montserrat", sans-serif';
-            ctx.fillStyle = chakra.glow;
-            ctx.shadowColor = chakra.glow;
-            ctx.shadowBlur = 8;
-            ctx.fillText(chakra.freq, 0, tagY + 48);
+            ctx.fillText(chakra.sanskrit, 0, tagY + 34);
 
             ctx.restore();
         }
@@ -2467,28 +2461,25 @@
 
                     drawDividerOrnament(rightCX, 400, 420, scene6Alpha);
 
-                    ctx.font = '700 30px "Cinzel", serif';
+                    ctx.font = '700 32px "Cinzel", serif';
                     ctx.fillStyle = '#ffffff';
+                    ctx.shadowColor = '#d4af37';
+                    ctx.shadowBlur = 18;
                     ctx.letterSpacing = '6px';
-                    ctx.fillText('NOW AVAILABLE WORLDWIDE', rightCX, 470);
+                    ctx.fillText('NOW AVAILABLE WORLDWIDE', rightCX, 480);
 
-                    ctx.font = '600 20px "Montserrat", sans-serif';
-                    ctx.fillStyle = '#d4af37';
-                    ctx.letterSpacing = '3.5px';
-                    ctx.fillText('PUBLISHED BY REACH PUBLISHERS', rightCX, 530);
-
-                    ctx.font = '700 21px "Cinzel", serif';
+                    ctx.font = '700 22px "Cinzel", serif';
                     ctx.fillStyle = '#fff0a8';
                     ctx.shadowColor = '#d4af37';
                     ctx.shadowBlur = 14;
                     ctx.letterSpacing = '4px';
-                    ctx.fillText('AMAZON  •  TAKEALOT  •  BARNES & NOBLE  •  BOOKSTORES', rightCX, 630);
+                    ctx.fillText('AMAZON  •  TAKEALOT  •  BARNES & NOBLE  •  BOOKSTORES', rightCX, 570);
 
-                    ctx.font = '400 19px "Montserrat", sans-serif';
+                    ctx.font = '400 20px "Montserrat", sans-serif';
                     ctx.fillStyle = '#cbd5e1';
                     ctx.shadowBlur = 0;
                     ctx.letterSpacing = '2px';
-                    ctx.fillText('Available in Paperback & eBook Editions', rightCX, 685);
+                    ctx.fillText('Available in Paperback & eBook Editions', rightCX, 630);
 
                     ctx.restore();
                 }
