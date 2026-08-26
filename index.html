@@ -1101,6 +1101,7 @@
         // COMPLETE 13-CHAKRA SYSTEM DATA (PER AUTHOR'S PG61)
         // ========================================================
         const chakraData = [
+            // Physical Chakras 1 to 7 (With Solfeggio Frequencies)
             { id: 1, name: 'Base', sanskrit: 'Muladhara', freq: '396 Hz', color: '#e74c3c', glow: '#ff6b6b' },
             { id: 2, name: 'Sacral', sanskrit: 'Svadhisthana', freq: '417 Hz', color: '#e67e22', glow: '#f39c12' },
             { id: 3, name: 'Solar Plexus', sanskrit: 'Manipura', freq: '528 Hz', color: '#f1c40f', glow: '#f39c12' },
@@ -1108,13 +1109,13 @@
             { id: 5, name: 'Throat', sanskrit: 'Vishuddha', freq: '741 Hz', color: '#00d2d3', glow: '#0abde3' },
             { id: 6, name: 'Third Eye', sanskrit: 'Ajna', freq: '852 Hz', color: '#5f27cd', glow: '#341f97' },
             { id: 7, name: 'Crown', sanskrit: 'Sahasrara', freq: '963 Hz', color: '#9b59b6', glow: '#8e44ad' },
-            // Higher Chakras 8 to 13
-            { id: 8, name: 'Personal', sanskrit: 'Higher Self Blueprint', freq: '1074 Hz', color: '#ffffff', glow: '#dff9fb' },
-            { id: 9, name: 'Planetary', sanskrit: 'Earth & Gaia Matrix', freq: '1185 Hz', color: '#f39c12', glow: '#f1c40f' },
-            { id: 10, name: 'Solar', sanskrit: 'Solar Light Core', freq: '1296 Hz', color: '#1dd1a1', glow: '#10ac84' },
-            { id: 11, name: 'Galactic', sanskrit: 'Galactic Gateway', freq: '1407 Hz', color: '#ff9ff3', glow: '#f368e0' },
-            { id: 12, name: 'Cosmic', sanskrit: 'Cosmic Consciousness', freq: '1518 Hz', color: '#ffd700', glow: '#fff200' },
-            { id: 13, name: 'I AM Presence', sanskrit: 'The Infinite Divine', freq: '1629 Hz', color: '#e056fd', glow: '#be2edd' }
+            // Higher Multidimensional Chakras 8 to 13 (Frequencies removed per author guidance)
+            { id: 8, name: 'Personal', sanskrit: 'Higher Self Blueprint', freq: '', color: '#ffffff', glow: '#dff9fb' },
+            { id: 9, name: 'Planetary', sanskrit: 'Earth & Gaia Matrix', freq: '', color: '#f39c12', glow: '#f1c40f' },
+            { id: 10, name: 'Solar', sanskrit: 'Solar Light Core', freq: '', color: '#1dd1a1', glow: '#10ac84' },
+            { id: 11, name: 'Galactic', sanskrit: 'Galactic Gateway', freq: '', color: '#ff9ff3', glow: '#f368e0' },
+            { id: 12, name: 'Cosmic', sanskrit: 'Cosmic Consciousness', freq: '', color: '#ffd700', glow: '#fff200' },
+            { id: 13, name: 'I AM Presence', sanskrit: 'The Infinite Divine', freq: '', color: '#e056fd', glow: '#be2edd' }
         ];
 
         // ========================================================
@@ -1914,46 +1915,62 @@
             ctx.shadowBlur = 0;
             ctx.fillText(`${chakra.id}`, 0, 2);
 
-            // Dynamic High-Contrast Label Capsule with Frequencies
+            // Intelligent High-Contrast Label Capsule (Adapts dynamically to physical vs higher chakras)
             const tagY = radius + 46;
+            const hasFreq = Boolean(chakra.freq);
 
             ctx.font = '700 19px "Cinzel", serif';
             const nameWidth = ctx.measureText(chakra.name.toUpperCase()).width;
-            ctx.font = 'italic 600 15px "Cormorant Garamond", serif';
+            ctx.font = 'italic 600 16px "Cormorant Garamond", serif';
             const sanskritWidth = ctx.measureText(chakra.sanskrit).width;
 
-            const requiredW = Math.max(nameWidth, sanskritWidth, 130) + 32;
-            const boxW = Math.max(requiredW, 185);
-            const boxH = 78;
+            const requiredW = Math.max(nameWidth, sanskritWidth, 130) + (hasFreq ? 32 : 36);
+            const boxW = Math.max(requiredW, hasFreq ? 185 : 180);
+            const boxH = hasFreq ? 78 : 62;
 
             ctx.save();
-            ctx.fillStyle = 'rgba(10, 14, 24, 0.9)';
+            ctx.fillStyle = 'rgba(10, 14, 24, 0.92)';
             ctx.strokeStyle = chakra.color;
             ctx.lineWidth = 2.0;
             ctx.shadowColor = chakra.glow;
             ctx.shadowBlur = 14;
             ctx.beginPath();
-            ctx.roundRect(-boxW * 0.5, tagY - 14, boxW, boxH, 12);
+            ctx.roundRect(-boxW * 0.5, tagY - (hasFreq ? 14 : 12), boxW, boxH, 12);
             ctx.fill();
             ctx.stroke();
             ctx.restore();
 
-            ctx.font = '700 19px "Cinzel", serif';
-            ctx.fillStyle = '#fff0a8';
-            ctx.shadowColor = '#d4af37';
-            ctx.shadowBlur = 12;
-            ctx.fillText(chakra.name.toUpperCase(), 0, tagY + 6);
+            if (hasFreq) {
+                // Physical Chakras 1 to 7 (3-tier: Name, Sanskrit, Solfeggio Hz)
+                ctx.font = '700 19px "Cinzel", serif';
+                ctx.fillStyle = '#fff0a8';
+                ctx.shadowColor = '#d4af37';
+                ctx.shadowBlur = 12;
+                ctx.fillText(chakra.name.toUpperCase(), 0, tagY + 6);
 
-            ctx.font = 'italic 600 15px "Cormorant Garamond", serif';
-            ctx.fillStyle = '#ffffff';
-            ctx.shadowBlur = 0;
-            ctx.fillText(chakra.sanskrit, 0, tagY + 29);
+                ctx.font = 'italic 600 15px "Cormorant Garamond", serif';
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowBlur = 0;
+                ctx.fillText(chakra.sanskrit, 0, tagY + 29);
 
-            ctx.font = '700 13px "Montserrat", sans-serif';
-            ctx.fillStyle = chakra.glow;
-            ctx.shadowColor = chakra.glow;
-            ctx.shadowBlur = 8;
-            ctx.fillText(chakra.freq, 0, tagY + 48);
+                ctx.font = '700 13px "Montserrat", sans-serif';
+                ctx.fillStyle = chakra.glow;
+                ctx.shadowColor = chakra.glow;
+                ctx.shadowBlur = 8;
+                ctx.fillText(chakra.freq, 0, tagY + 48);
+            } else {
+                // Higher Multidimensional Chakras 8 to 13 (2-tier: Clean Name & Dimension/Subtitle)
+                ctx.font = '700 19px "Cinzel", serif';
+                ctx.fillStyle = '#fff0a8';
+                ctx.shadowColor = '#d4af37';
+                ctx.shadowBlur = 12;
+                ctx.fillText(chakra.name.toUpperCase(), 0, tagY + 10);
+
+                ctx.font = 'italic 600 16px "Cormorant Garamond", serif';
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowBlur = 0;
+                ctx.fillText(chakra.sanskrit, 0, tagY + 34);
+            }
 
             ctx.restore();
         }
