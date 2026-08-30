@@ -2097,7 +2097,7 @@
 
             // ========================================================
             // SCENE 1: THE GRAND BOOK INTRODUCTION HOOK (0:00 - 0:08)
-            // (Immediately shows the 3D book so viewers know it's a book release)
+            // (Spacious layout, 3D spin showing readable back & front, smooth blend to Scene 2)
             // ========================================================
             if (currentScene === 1) {
                 const st = t;
@@ -2105,54 +2105,99 @@
                 const fadeOut = st > 6.8 ? Math.max((8.0 - st) / 1.2, 0) : 1;
                 const alpha = fadeIn * fadeOut;
 
-                // Left: Floating 3D Book Cover with Gentle Glide
-                const enterP = Math.min(st / 1.6, 1.0);
+                // 3D Book Rotation with Back Cover Reveal & Reading Pause
+                let rotY = 0;
+                if (st < 1.0) {
+                    // Front cover entrance
+                    rotY = 0;
+                } else if (st < 2.5) {
+                    // Smoothly rotates to back cover
+                    const p = (st - 1.0) / 1.5;
+                    const ease = p * p * (3 - 2 * p);
+                    rotY = ease * Math.PI;
+                } else if (st < 4.8) {
+                    // Back cover reading pause (~2.3 seconds)
+                    rotY = Math.PI + Math.sin((st - 2.5) * 1.2) * 0.05;
+                } else if (st < 6.4) {
+                    // Smoothly rotates back to front cover
+                    const p = (st - 4.8) / 1.6;
+                    const ease = p * p * (3 - 2 * p);
+                    rotY = Math.PI + ease * Math.PI;
+                } else {
+                    // Settles into proud showcase angle
+                    rotY = -0.12 + Math.sin((st - 6.4) * 1.5) * 0.04;
+                }
+
+                // Generously spaced Left Position (book center at x = 420)
+                const enterP = Math.min(st / 1.4, 1.0);
                 const easeX = 1 - Math.pow(1 - enterP, 3);
-                const bookX = 420 + (easeX * 140); // Glides gracefully into 560
+                const driftOut = st > 6.8 ? (st - 6.8) * 40 : 0;
+                const bookX = 350 + (easeX * 70) + driftOut; // Stays anchored around 420
                 const floatY = Math.sin(st * 2.2) * 10;
-                const rotY = -0.14 + Math.sin(st * 1.5) * 0.04;
 
                 ctx.save();
                 ctx.globalAlpha = alpha;
-                draw3DBook(bookX, 530 + floatY, rotY, 0.96, st);
+                draw3DBook(bookX, 530 + floatY, rotY, 0.86, st);
 
-                // Right: Bold Title & Author Hook
-                const rightCX = 1260;
+                // Right: High-Impact Typography Centered at x = 1320 (Spacious 260px gap from book)
+                const rightCX = 1320;
                 ctx.textAlign = 'center';
 
                 // Top Introducing Banner
-                ctx.font = '700 22px "Cinzel", serif';
+                ctx.font = '700 20px "Cinzel", serif';
                 ctx.fillStyle = '#ffd700';
-                ctx.letterSpacing = '6px';
+                ctx.letterSpacing = '5px';
                 ctx.shadowColor = '#d4af37';
                 ctx.shadowBlur = 16;
-                ctx.fillText('INTRODUCING THE GROUNDBREAKING NEW BOOK', rightCX, 300);
+                ctx.fillText('INTRODUCING THE GROUNDBREAKING NEW BOOK', rightCX, 290);
 
-                drawDividerOrnament(rightCX, 340, 420, alpha);
+                drawDividerOrnament(rightCX, 330, 380, alpha);
 
                 // Main Title
-                ctx.font = '900 68px "Cinzel", serif';
+                ctx.font = '900 66px "Cinzel", serif';
                 ctx.fillStyle = '#ffffff';
                 ctx.letterSpacing = '4px';
                 ctx.shadowColor = '#d4af37';
                 ctx.shadowBlur = 28;
-                ctx.fillText('CHAKRA', rightCX, 430);
+                ctx.fillText('CHAKRA', rightCX, 415);
 
                 ctx.fillStyle = '#d4af37';
-                ctx.fillText('ENERGETICS', rightCX, 505);
+                ctx.fillText('ENERGETICS', rightCX, 488);
 
                 // Author Name & Signature
-                ctx.font = '78px "Great Vibes", cursive';
+                ctx.font = '76px "Great Vibes", cursive';
                 ctx.fillStyle = '#f3e5ab';
                 ctx.shadowColor = '#d4af37';
                 ctx.shadowBlur = 20;
-                ctx.fillText('by Eliza James', rightCX, 615);
+                ctx.fillText('by Eliza James', rightCX, 595);
 
-                // Bottom Subtitle Tagline
-                ctx.font = '300 24px "Cormorant Garamond", serif';
+                // Subtitle split across 2 clean lines (Never crowds the book)
+                ctx.font = '300 22px "Cormorant Garamond", serif';
                 ctx.fillStyle = '#e2e8f0';
                 ctx.shadowBlur = 0;
-                ctx.fillText('A Transformative Journey into the 13-Chakra Multidimensional System', rightCX, 690);
+                ctx.letterSpacing = '1px';
+                ctx.fillText('A Transformative Journey into the', rightCX, 665);
+
+                ctx.font = '700 21px "Cinzel", serif';
+                ctx.fillStyle = '#fff0a8';
+                ctx.shadowColor = '#d4af37';
+                ctx.shadowBlur = 10;
+                ctx.letterSpacing = '3px';
+                ctx.fillText('13-CHAKRA MULTIDIMENSIONAL SYSTEM', rightCX, 705);
+
+                // Soft central portal glow during exit transition into Scene 2
+                if (st > 6.8) {
+                    const tTrans = (st - 6.8) / 1.2;
+                    const portalR = tTrans * 500;
+                    const pGrad = ctx.createRadialGradient(960, 420, 10, 960, 420, portalR);
+                    pGrad.addColorStop(0, 'rgba(255, 240, 168, 0.45)');
+                    pGrad.addColorStop(0.5, 'rgba(212, 175, 55, 0.2)');
+                    pGrad.addColorStop(1, 'transparent');
+                    ctx.fillStyle = pGrad;
+                    ctx.beginPath();
+                    ctx.arc(960, 420, portalR, 0, Math.PI * 2);
+                    ctx.fill();
+                }
 
                 ctx.restore();
 
