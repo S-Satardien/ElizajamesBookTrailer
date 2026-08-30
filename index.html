@@ -2097,7 +2097,7 @@
 
             // ========================================================
             // SCENE 1: THE GRAND BOOK INTRODUCTION HOOK (0:00 - 0:08)
-            // (1-second back cover spin, pure title typography, smooth blend to Scene 2)
+            // (Spin showing back cover at 3-4s, harmonized closer spacing)
             // ========================================================
             if (currentScene === 1) {
                 const st = t;
@@ -2105,42 +2105,42 @@
                 const fadeOut = st > 6.8 ? Math.max((8.0 - st) / 1.2, 0) : 1;
                 const alpha = fadeIn * fadeOut;
 
-                // 3D Book Rotation with 1-Second Back Cover Glance
+                // 3D Book Rotation: Back Cover shown between 3.0s and 4.0s
                 let rotY = 0;
-                if (st < 0.8) {
+                if (st < 1.8) {
                     // Front cover entrance
                     rotY = 0;
-                } else if (st < 2.0) {
+                } else if (st < 3.0) {
                     // Smoothly rotates to back cover
-                    const p = (st - 0.8) / 1.2;
+                    const p = (st - 1.8) / 1.2;
                     const ease = p * p * (3 - 2 * p);
                     rotY = ease * Math.PI;
-                } else if (st < 3.0) {
-                    // Back cover pause (exactly 1.0 second)
-                    rotY = Math.PI + Math.sin((st - 2.0) * 1.5) * 0.04;
-                } else if (st < 4.2) {
+                } else if (st < 4.0) {
+                    // Back cover displayed from 3.0s to 4.0s
+                    rotY = Math.PI + Math.sin((st - 3.0) * 1.5) * 0.04;
+                } else if (st < 5.2) {
                     // Smoothly rotates back to front cover
-                    const p = (st - 3.0) / 1.2;
+                    const p = (st - 4.0) / 1.2;
                     const ease = p * p * (3 - 2 * p);
                     rotY = Math.PI + ease * Math.PI;
                 } else {
                     // Settles into proud front showcase angle with specular glint
-                    rotY = -0.12 + Math.sin((st - 4.2) * 1.5) * 0.04;
+                    rotY = -0.12 + Math.sin((st - 5.2) * 1.5) * 0.04;
                 }
 
-                // Generously spaced Left Position (book center at x = 420)
+                // Harmonized Composition: Book position brought closer to center (x = 480)
                 const enterP = Math.min(st / 1.4, 1.0);
                 const easeX = 1 - Math.pow(1 - enterP, 3);
-                const driftOut = st > 6.8 ? (st - 6.8) * 40 : 0;
-                const bookX = 350 + (easeX * 70) + driftOut;
+                const driftOut = st > 6.8 ? (st - 6.8) * 35 : 0;
+                const bookX = 400 + (easeX * 80) + driftOut; // Anchored at x = 480
                 const floatY = Math.sin(st * 2.2) * 10;
 
                 ctx.save();
                 ctx.globalAlpha = alpha;
                 draw3DBook(bookX, 530 + floatY, rotY, 1.04, st);
 
-                // Right: High-Impact Centered Typography (Centered around y = 540)
-                const rightCX = 1320;
+                // Right: Typography Centered closer at x = 1260 for balanced synergy
+                const rightCX = 1260;
                 ctx.textAlign = 'center';
 
                 // Main Title
