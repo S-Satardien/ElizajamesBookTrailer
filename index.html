@@ -733,15 +733,15 @@
 
         .scenes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
         }
 
         .scene-card {
             background: rgba(18, 22, 34, 0.65);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
-            padding: 14px;
+            padding: 12px;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -756,22 +756,22 @@
         .scene-card .card-header {
             display: flex;
             justify-content: space-between;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: var(--gold-primary);
             font-family: 'Cinzel', serif;
             letter-spacing: 1.5px;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .scene-card h4 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #fff;
             margin-bottom: 4px;
         }
 
         .scene-card p {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: #9ca3af;
             line-height: 1.35;
         }
@@ -853,12 +853,13 @@
                 <div class="form-group">
                     <label for="sceneSelect">Target Scene</label>
                     <select id="sceneSelect">
-                        <option value="Scene 1 (0:00 - 0:08): The Cosmic Awakening">Scene 1: The Cosmic Awakening (0:00 - 0:08)</option>
-                        <option value="Scene 2 (0:08 - 0:17): Physical Chakras 1 to 7">Scene 2: Physical Chakras 1 to 7 (0:08 - 0:17)</option>
-                        <option value="Scene 3 (0:17 - 0:26): Higher Chakras 8 to 13">Scene 3: Higher Chakras 8 to 13 (0:17 - 0:26)</option>
-                        <option value="Scene 4 (0:26 - 0:35): Ascended Masters">Scene 4: Ascended Masters (0:26 - 0:35)</option>
-                        <option value="Scene 5 (0:35 - 0:44): 3D Book Reveal">Scene 5: 3D Book Reveal (0:35 - 0:44)</option>
-                        <option value="Scene 6 (0:44 - 0:50): Signature & Retailers">Scene 6: Signature & Retailers (0:44 - 0:50)</option>
+                        <option value="Scene 1 (0:00 - 0:08): Book Reveal Opening">Scene 1: Book Reveal Opening (0:00 - 0:08)</option>
+                        <option value="Scene 2 (0:08 - 0:16): The Cosmic Awakening">Scene 2: The Cosmic Awakening (0:08 - 0:16)</option>
+                        <option value="Scene 3 (0:16 - 0:25): Physical Chakras 1 to 7">Scene 3: Physical Chakras 1 to 7 (0:16 - 0:25)</option>
+                        <option value="Scene 4 (0:25 - 0:34): Higher Chakras 8 to 13">Scene 4: Higher Chakras 8 to 13 (0:25 - 0:34)</option>
+                        <option value="Scene 5 (0:34 - 0:43): Ascended Masters">Scene 5: Ascended Masters (0:34 - 0:43)</option>
+                        <option value="Scene 6 (0:43 - 0:52): Core Teachings & 3D Spin">Scene 6: Core Teachings & 3D Spin (0:43 - 0:52)</option>
+                        <option value="Scene 7 (0:52 - 0:58): Signature & Retailers">Scene 7: Signature & Retailers (0:52 - 0:58)</option>
                         <option value="General Soundtrack & Trailer Audio">General: Soundtrack & Audio</option>
                         <option value="Overall Trailer Notes">Overall Trailer Feedback</option>
                     </select>
@@ -911,7 +912,7 @@
                             <span class="rec-dot"></span>
                             RECORDING 1080P VIDEO WITH AUDIO
                         </span>
-                        <span id="recTime">00:00 / 00:50</span>
+                        <span id="recTime">00:00 / 00:58</span>
                     </div>
                     <div class="rec-progress-bar">
                         <div class="rec-progress-fill" id="recProgressFill"></div>
@@ -926,11 +927,11 @@
             <!-- Glass Controls Bar -->
             <div class="controls-card">
                 <div class="progress-row">
-                    <span class="time-display" id="timeLabel">00:00 / 00:50</span>
+                    <span class="time-display" id="timeLabel">00:00 / 00:58</span>
                     <div class="timeline-bar" id="timelineBar">
                         <div class="timeline-fill" id="timelineFill"></div>
                     </div>
-                    <div class="scene-indicator" id="sceneIndicator">Scene: <span>1 / 6</span></div>
+                    <div class="scene-indicator" id="sceneIndicator">Scene: <span>1 / 7</span></div>
                 </div>
 
                 <div class="buttons-row">
@@ -988,47 +989,55 @@
                             <span>0:00 - 0:08</span>
                             <span>SCENE 1</span>
                         </div>
-                        <h4>The Cosmic Awakening</h4>
-                        <p>Intricate Sacred Flower of Life & 12-Lotus Star Mandala with golden light rays.</p>
+                        <h4>Book Reveal Opening</h4>
+                        <p>Immediate 3D book presence establishing the groundbreaking new release by Eliza James.</p>
                     </div>
                     <div class="scene-card" onclick="seekToTime(8)">
                         <div class="card-header">
-                            <span>0:08 - 0:17</span>
+                            <span>0:08 - 0:16</span>
                             <span>SCENE 2</span>
                         </div>
-                        <h4>Chakras 1 to 7 (Base to Crown)</h4>
-                        <p>Chakras ignite 1-by-1 along the Sushumna spine with BASE chakra and high-contrast badges.</p>
+                        <h4>The Cosmic Awakening</h4>
+                        <p>Intricate Sacred Flower of Life & 12-Lotus Star Mandala with golden radiant aura.</p>
                     </div>
-                    <div class="scene-card" onclick="seekToTime(17)">
+                    <div class="scene-card" onclick="seekToTime(16)">
                         <div class="card-header">
-                            <span>0:17 - 0:26</span>
+                            <span>0:16 - 0:25</span>
                             <span>SCENE 3</span>
                         </div>
-                        <h4>Chakras 8 to 13 (The 13-Chakra System)</h4>
+                        <h4>Physical Chakras 1 to 7</h4>
+                        <p>Base to Crown ignite along the Sushumna spine with Solfeggio frequencies (396 - 963 Hz).</p>
+                    </div>
+                    <div class="scene-card" onclick="seekToTime(25)">
+                        <div class="card-header">
+                            <span>0:25 - 0:34</span>
+                            <span>SCENE 4</span>
+                        </div>
+                        <h4>Higher Chakras 8 to 13</h4>
                         <p>Personal, Planetary, Solar, Galactic, Cosmic & I AM Presence ascend into light.</p>
                     </div>
-                    <div class="scene-card" onclick="seekToTime(26)">
+                    <div class="scene-card" onclick="seekToTime(34)">
                         <div class="card-header">
-                            <span>0:26 - 0:35</span>
-                            <span>SCENE 4</span>
+                            <span>0:34 - 0:43</span>
+                            <span>SCENE 5</span>
                         </div>
                         <h4>Ascended Masters Reveal</h4>
                         <p>St Germain & Serapis Bey glide into place with gold filigree frames & amethyst halos.</p>
                     </div>
-                    <div class="scene-card" onclick="seekToTime(35)">
+                    <div class="scene-card" onclick="seekToTime(43)">
                         <div class="card-header">
-                            <span>0:35 - 0:44</span>
-                            <span>SCENE 5</span>
-                        </div>
-                        <h4>3D Book Reveal & Core Teachings</h4>
-                        <p>Extended 3D spin highlighting both back & front covers, seamlessly gliding into the finale.</p>
-                    </div>
-                    <div class="scene-card" onclick="seekToTime(44)">
-                        <div class="card-header">
-                            <span>0:44 - 0:50</span>
+                            <span>0:43 - 0:52</span>
                             <span>SCENE 6</span>
                         </div>
-                        <h4>Author Signature, 3D Book & Retailers</h4>
+                        <h4>Core Teachings & 3D Spin</h4>
+                        <p>Extended 3D spin highlighting both back & front covers, seamlessly gliding into the finale.</p>
+                    </div>
+                    <div class="scene-card" onclick="seekToTime(52)">
+                        <div class="card-header">
+                            <span>0:52 - 0:58</span>
+                            <span>SCENE 7</span>
+                        </div>
+                        <h4>Author Signature & Retailers</h4>
                         <p>Smoothly anchored 3D book showcase with Takealot, Amazon, Barnes & Noble & eBook editions.</p>
                     </div>
                 </div>
@@ -1040,7 +1049,7 @@
 
     <script>
         /**
-         * CHAKRA ENERGETICS - OFFICIAL CINEMATIC BOOK TRAILER ENGINE
+         * CHAKRA ENERGETICS - OFFICIAL CINEMATIC BOOK TRAILER ENGINE (7-SCENE MASTER)
          */
 
         const canvas = document.getElementById('renderCanvas');
@@ -1078,7 +1087,7 @@
         const commentsListContainer = document.getElementById('commentsListContainer');
         const commentCountBadge = document.getElementById('commentCountBadge');
 
-        const TOTAL_DURATION = 50.0;
+        const TOTAL_DURATION = 58.0;
         let currentTime = 0;
         let isPlaying = false;
         let lastFrameTime = performance.now();
@@ -1157,11 +1166,13 @@
             commentTimestampInput.value = ts;
 
             let sIdx = 0;
-            if (currentTime >= 44.0) sIdx = 5;
-            else if (currentTime >= 35.0) sIdx = 4;
-            else if (currentTime >= 26.0) sIdx = 3;
-            else if (currentTime >= 17.0) sIdx = 2;
+            if (currentTime >= 52.0) sIdx = 6;
+            else if (currentTime >= 43.0) sIdx = 5;
+            else if (currentTime >= 34.0) sIdx = 4;
+            else if (currentTime >= 25.0) sIdx = 3;
+            else if (currentTime >= 16.0) sIdx = 2;
             else if (currentTime >= 8.0) sIdx = 1;
+            else sIdx = 0;
             sceneSelectInput.selectedIndex = sIdx;
 
             showToast(`Captured timestamp: ${ts}`);
@@ -1609,16 +1620,19 @@
             let gradColor2 = '#0c0f18';
             let gradColor3 = '#040609';
 
-            if (sceneId === 2) {
+            if (sceneId === 1) {
+                gradColor1 = '#281c10';
+                gradColor2 = '#110b06';
+            } else if (sceneId === 3) {
                 gradColor1 = '#23152c';
                 gradColor2 = '#130c1e';
-            } else if (sceneId === 3) {
+            } else if (sceneId === 4) {
                 gradColor1 = '#2d2411';
                 gradColor2 = '#141108';
-            } else if (sceneId === 4) {
+            } else if (sceneId === 5) {
                 gradColor1 = '#2a1435';
                 gradColor2 = '#110718';
-            } else if (sceneId >= 5) {
+            } else if (sceneId >= 6) {
                 gradColor1 = '#241c10';
                 gradColor2 = '#0d0a06';
             }
@@ -1915,7 +1929,7 @@
             ctx.shadowBlur = 0;
             ctx.fillText(`${chakra.id}`, 0, 2);
 
-            // Intelligent High-Contrast Label Capsule (Adapts dynamically to physical vs higher chakras)
+            // Dynamic High-Contrast Label Capsule
             const tagY = radius + 46;
             const hasFreq = Boolean(chakra.freq);
 
@@ -1959,7 +1973,7 @@
                 ctx.shadowBlur = 8;
                 ctx.fillText(chakra.freq, 0, tagY + 48);
             } else {
-                // Higher Multidimensional Chakras 8 to 13 (2-tier: Clean Name & Dimension/Subtitle)
+                // Higher Multidimensional Chakras 8 to 13 (2-tier: Clean Name & Subtitle)
                 ctx.font = '700 19px "Cinzel", serif';
                 ctx.fillStyle = '#fff0a8';
                 ctx.shadowColor = '#d4af37';
@@ -2063,7 +2077,7 @@
         }
 
         // ========================================================
-        // MAIN FRAME RENDER LOOP
+        // MAIN FRAME RENDER LOOP (7-SCENE MASTER ENGINE)
         // ========================================================
         let prevSceneIndex = -1;
 
@@ -2071,21 +2085,83 @@
             const t = currentTime;
 
             let currentScene = 1;
-            if (t >= 44.0) currentScene = 6;
-            else if (t >= 35.0) currentScene = 5;
-            else if (t >= 26.0) currentScene = 4;
-            else if (t >= 17.0) currentScene = 3;
+            if (t >= 52.0) currentScene = 7;
+            else if (t >= 43.0) currentScene = 6;
+            else if (t >= 34.0) currentScene = 5;
+            else if (t >= 25.0) currentScene = 4;
+            else if (t >= 16.0) currentScene = 3;
             else if (t >= 8.0) currentScene = 2;
             else currentScene = 1;
 
             drawDynamicBackground(t, currentScene);
 
-            // ==========================================
-            // SCENE 1: THE COSMIC AWAKENING (0:00 - 0:08)
-            // ==========================================
+            // ========================================================
+            // SCENE 1: THE GRAND BOOK INTRODUCTION HOOK (0:00 - 0:08)
+            // (Immediately shows the 3D book so viewers know it's a book release)
+            // ========================================================
             if (currentScene === 1) {
                 const st = t;
-                const fadeIn = Math.min(st / 1.5, 1);
+                const fadeIn = Math.min(st / 1.2, 1);
+                const fadeOut = st > 6.8 ? Math.max((8.0 - st) / 1.2, 0) : 1;
+                const alpha = fadeIn * fadeOut;
+
+                // Left: Floating 3D Book Cover with Gentle Glide
+                const enterP = Math.min(st / 1.6, 1.0);
+                const easeX = 1 - Math.pow(1 - enterP, 3);
+                const bookX = 420 + (easeX * 140); // Glides gracefully into 560
+                const floatY = Math.sin(st * 2.2) * 10;
+                const rotY = -0.14 + Math.sin(st * 1.5) * 0.04;
+
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                draw3DBook(bookX, 530 + floatY, rotY, 0.96, st);
+
+                // Right: Bold Title & Author Hook
+                const rightCX = 1260;
+                ctx.textAlign = 'center';
+
+                // Top Introducing Banner
+                ctx.font = '700 22px "Cinzel", serif';
+                ctx.fillStyle = '#ffd700';
+                ctx.letterSpacing = '6px';
+                ctx.shadowColor = '#d4af37';
+                ctx.shadowBlur = 16;
+                ctx.fillText('INTRODUCING THE GROUNDBREAKING NEW BOOK', rightCX, 300);
+
+                drawDividerOrnament(rightCX, 340, 420, alpha);
+
+                // Main Title
+                ctx.font = '900 68px "Cinzel", serif';
+                ctx.fillStyle = '#ffffff';
+                ctx.letterSpacing = '4px';
+                ctx.shadowColor = '#d4af37';
+                ctx.shadowBlur = 28;
+                ctx.fillText('CHAKRA', rightCX, 430);
+
+                ctx.fillStyle = '#d4af37';
+                ctx.fillText('ENERGETICS', rightCX, 505);
+
+                // Author Name & Signature
+                ctx.font = '78px "Great Vibes", cursive';
+                ctx.fillStyle = '#f3e5ab';
+                ctx.shadowColor = '#d4af37';
+                ctx.shadowBlur = 20;
+                ctx.fillText('by Eliza James', rightCX, 615);
+
+                // Bottom Subtitle Tagline
+                ctx.font = '300 24px "Cormorant Garamond", serif';
+                ctx.fillStyle = '#e2e8f0';
+                ctx.shadowBlur = 0;
+                ctx.fillText('A Transformative Journey into the 13-Chakra Multidimensional System', rightCX, 690);
+
+                ctx.restore();
+
+            // ========================================================
+            // SCENE 2: THE COSMIC AWAKENING & SACRED MANDALA (0:08 - 0:16)
+            // ========================================================
+            } else if (currentScene === 2) {
+                const st = t - 8.0;
+                const fadeIn = Math.min(st / 1.2, 1);
                 const fadeOut = st > 6.8 ? Math.max((8.0 - st) / 1.2, 0) : 1;
                 const alpha = fadeIn * fadeOut;
 
@@ -2109,11 +2185,11 @@
                 ctx.fillText('Beyond the Physical Body Lies the Multidimensional Self', 960, 825);
                 ctx.restore();
 
-            // ==========================================
-            // SCENE 2: PHYSICAL CHAKRAS 1 TO 7 (BASE TO CROWN) (0:08 - 0:17)
-            // ==========================================
-            } else if (currentScene === 2) {
-                const st = t - 8.0;
+            // ========================================================
+            // SCENE 3: PHYSICAL CHAKRAS 1 TO 7 (BASE TO CROWN) (0:16 - 0:25)
+            // ========================================================
+            } else if (currentScene === 3) {
+                const st = t - 16.0;
                 const fadeIn = Math.min(st / 1.0, 1);
                 const fadeOut = st > 7.8 ? Math.max((9.0 - st) / 1.2, 0) : 1;
                 const alpha = fadeIn * fadeOut;
@@ -2167,11 +2243,11 @@
                 ctx.fillText('that which is incarnate, temporal and mortal.”', 960, 842);
                 ctx.restore();
 
-            // ==========================================
-            // SCENE 3: HIGHER CHAKRAS 8 TO 13 (THE 13-CHAKRA SYSTEM) (0:17 - 0:26)
-            // ==========================================
-            } else if (currentScene === 3) {
-                const st = t - 17.0;
+            // ========================================================
+            // SCENE 4: HIGHER CHAKRAS 8 TO 13 (THE 13-CHAKRA SYSTEM) (0:25 - 0:34)
+            // ========================================================
+            } else if (currentScene === 4) {
+                const st = t - 25.0;
                 const fadeIn = Math.min(st / 1.0, 1);
                 const fadeOut = st > 7.8 ? Math.max((9.0 - st) / 1.2, 0) : 1;
                 const alpha = fadeIn * fadeOut;
@@ -2225,11 +2301,11 @@
                 ctx.fillText('that which is the I AM, the eternal and infinite.”', 960, 842);
                 ctx.restore();
 
-            // ==========================================
-            // SCENE 4: ASCENDED MASTERS (0:26 - 0:35)
-            // ==========================================
-            } else if (currentScene === 4) {
-                const st = t - 26.0;
+            // ========================================================
+            // SCENE 5: ASCENDED MASTERS (0:34 - 0:43)
+            // ========================================================
+            } else if (currentScene === 5) {
+                const st = t - 34.0;
                 const fadeIn = Math.min(st / 1.0, 1);
                 const fadeOut = st > 7.8 ? Math.max((9.0 - st) / 1.2, 0) : 1;
                 const alpha = fadeIn * fadeOut;
@@ -2368,10 +2444,10 @@
                 ctx.restore();
 
             // ========================================================
-            // SCENES 5 & 6: SEAMLESS 3D BOOK JOURNEY & GRAND FINALE
+            // SCENES 6 & 7: 3D BOOK JOURNEY & GRAND FINALE (0:43 - 0:58)
             // ========================================================
             } else {
-                const st = t - 35.0;
+                const st = t - 43.0; // 0 to 15s
 
                 // Compute 3D Book Rotation Angle (rotY) with extended Back Cover pause
                 let rotY = 0;
@@ -2391,42 +2467,42 @@
                     rotY = Math.sin((st - 6.8) * 1.0) * 0.06;
                 }
 
-                // Smooth Glide Transition
+                // Smooth Glide Transition into Scene 7
                 let bookX = 620;
                 let bookScale = 1.0;
-                let scene5Alpha = 1.0;
-                let scene6Alpha = 0.0;
+                let scene6Alpha = 1.0;
+                let scene7Alpha = 0.0;
 
-                if (t < 43.0) {
+                if (t < 50.5) {
                     bookX = 620;
                     bookScale = 1.0;
-                    scene5Alpha = Math.min((t - 35.0) / 1.0, 1.0);
-                    scene6Alpha = 0.0;
-                } else if (t <= 45.0) {
-                    const blend = (t - 43.0) / 2.0;
+                    scene6Alpha = Math.min((t - 43.0) / 1.0, 1.0);
+                    scene7Alpha = 0.0;
+                } else if (t <= 52.5) {
+                    const blend = (t - 50.5) / 2.0;
                     const smoothBlend = blend * blend * (3 - 2 * blend);
 
                     bookX = 620 + (500 - 620) * smoothBlend;
                     bookScale = 1.0 + (0.86 - 1.0) * smoothBlend;
                     rotY = rotY * (1 - smoothBlend) + (-0.15) * smoothBlend;
 
-                    scene5Alpha = 1.0 - smoothBlend;
-                    scene6Alpha = smoothBlend;
+                    scene6Alpha = 1.0 - smoothBlend;
+                    scene7Alpha = smoothBlend;
                 } else {
                     bookX = 500;
                     bookScale = 0.86;
                     rotY = -0.15 + Math.sin(t * 1.5) * 0.04;
-                    scene5Alpha = 0.0;
-                    scene6Alpha = 1.0;
+                    scene6Alpha = 0.0;
+                    scene7Alpha = 1.0;
                 }
 
                 const floatY = Math.sin(st * 2.0) * 10;
                 draw3DBook(bookX, 530 + floatY, rotY, bookScale, st);
 
-                // Scene 5 Text
-                if (scene5Alpha > 0.01) {
+                // Scene 6 Text Overlay (Core Teachings & Bullets)
+                if (scene6Alpha > 0.01) {
                     ctx.save();
-                    ctx.globalAlpha = scene5Alpha;
+                    ctx.globalAlpha = scene6Alpha;
                     ctx.textAlign = 'left';
 
                     ctx.font = '900 60px "Cinzel", serif';
@@ -2437,7 +2513,7 @@
                     ctx.fillStyle = '#d4af37';
                     ctx.fillText('ENERGETICS', 950, 400);
 
-                    drawDividerOrnament(1140, 435, 380, scene5Alpha);
+                    drawDividerOrnament(1140, 435, 380, scene6Alpha);
 
                     ctx.font = '600 24px "Cinzel", serif';
                     ctx.fillStyle = '#f3e5ab';
@@ -2468,10 +2544,10 @@
                     ctx.restore();
                 }
 
-                // Scene 6 Text
-                if (scene6Alpha > 0.01) {
+                // Scene 7 Text Overlay (Grand Finale & Retailers)
+                if (scene7Alpha > 0.01) {
                     ctx.save();
-                    ctx.globalAlpha = scene6Alpha;
+                    ctx.globalAlpha = scene7Alpha;
                     ctx.textAlign = 'center';
 
                     const rightCX = 1240;
@@ -2482,7 +2558,7 @@
                     ctx.shadowBlur = 25;
                     ctx.fillText('Eliza James', rightCX, 350);
 
-                    drawDividerOrnament(rightCX, 400, 420, scene6Alpha);
+                    drawDividerOrnament(rightCX, 400, 420, scene7Alpha);
 
                     ctx.font = '700 32px "Cinzel", serif';
                     ctx.fillStyle = '#ffffff';
@@ -2519,8 +2595,8 @@
             if (isRecording) {
                 const recPct = (currentTime / TOTAL_DURATION) * 100;
                 recProgressFill.style.width = `${recPct}%`;
-                recTime.textContent = `${formatSecondsToTimestamp(currentTime)} / 00:50`;
-                recStatus.textContent = `Scene ${currentScene} of 6 (${Math.round(recPct)}%)...`;
+                recTime.textContent = `${formatSecondsToTimestamp(currentTime)} / 00:58`;
+                recStatus.textContent = `Scene ${currentScene} of 7 (${Math.round(recPct)}%)...`;
             }
         }
 
@@ -2535,13 +2611,14 @@
             timelineFill.style.width = `${pct}%`;
 
             let sceneNum = 1;
-            if (currentTime >= 44.0) sceneNum = 6;
-            else if (currentTime >= 35.0) sceneNum = 5;
-            else if (currentTime >= 26.0) sceneNum = 4;
-            else if (currentTime >= 17.0) sceneNum = 3;
+            if (currentTime >= 52.0) sceneNum = 7;
+            else if (currentTime >= 43.0) sceneNum = 6;
+            else if (currentTime >= 34.0) sceneNum = 5;
+            else if (currentTime >= 25.0) sceneNum = 4;
+            else if (currentTime >= 16.0) sceneNum = 3;
             else if (currentTime >= 8.0) sceneNum = 2;
 
-            sceneIndicator.innerHTML = `Scene: <span>${sceneNum} / 6</span>`;
+            sceneIndicator.innerHTML = `Scene: <span>${sceneNum} / 7</span>`;
         }
 
         function updateActiveSceneCard(index) {
