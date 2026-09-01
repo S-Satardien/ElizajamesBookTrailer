@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600;1,700&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="assets/strauss_audio_b64.js"></script>
+    <script src="assets/whatsapp_audio_b64.js"></script>
     <style>
         :root {
             --gold-primary: #d4af37;
@@ -955,12 +956,14 @@
                         </div>
 
                         <select class="audio-select" id="soundPreset">
+                            <option value="peace_soul">🕊️ Peace in the Soul (Gentle & Soft)</option>
+                            <option value="whatsapp1">🌸 WhatsApp Gentle Audio 1</option>
+                            <option value="whatsapp2">✨ WhatsApp Gentle Audio 2</option>
                             <option value="strauss">🎵 Strauss - The Blue Danube (from 2:00)</option>
-                            <option value="gentle_ambient">🌸 Gentle & Soft Ambient (432Hz Ethereal Calm)</option>
-                            <option value="gentle_piano">🕊️ Soft Meditative Piano & Strings</option>
-                            <option value="celestial">✨ 432Hz Sacred Celestial Choir (Synth)</option>
+                            <option value="gentle_ambient">🌿 Gentle & Soft Ambient (432Hz Calm)</option>
+                            <option value="gentle_piano">🎹 Soft Meditative Piano & Strings</option>
+                            <option value="celestial">🌌 432Hz Sacred Celestial Choir (Synth)</option>
                             <option value="tchaikovsky">🎼 Tchaikovsky Ethereal Waltz (Synth)</option>
-                            <option value="anthem">🚀 Ascending Symphonic Anthem (Synth)</option>
                         </select>
                     </div>
 
@@ -1332,10 +1335,37 @@
         // ========================================================
         const htmlAudio = new Audio();
         htmlAudio.preload = 'auto';
-        if (window.STRAUSS_AUDIO_DATA) {
+        let currentLoadedAudioMode = 'peace_soul';
+
+        if (window.PEACE_IN_SOUL_AUDIO_DATA) {
+            htmlAudio.src = window.PEACE_IN_SOUL_AUDIO_DATA;
+        } else if (window.STRAUSS_AUDIO_DATA) {
             htmlAudio.src = window.STRAUSS_AUDIO_DATA;
         } else {
-            htmlAudio.src = 'assets/strauss-blue-danube-trailer.mp3';
+            htmlAudio.src = 'assets/peace-in-the-soul.mp3';
+        }
+
+        function loadAudioSourceForMode(mode) {
+            let desiredSrc = '';
+            if (mode === 'peace_soul') {
+                desiredSrc = window.PEACE_IN_SOUL_AUDIO_DATA || 'assets/peace-in-the-soul.mp3';
+            } else if (mode === 'whatsapp1') {
+                desiredSrc = window.WHATSAPP_AUDIO_1_DATA || 'assets/whatsapp-track-1.mp3';
+            } else if (mode === 'whatsapp2') {
+                desiredSrc = window.WHATSAPP_AUDIO_2_DATA || 'assets/whatsapp-track-2.mp3';
+            } else if (mode === 'strauss') {
+                desiredSrc = window.STRAUSS_AUDIO_DATA || 'assets/strauss-blue-danube-trailer.mp3';
+            }
+
+            if (desiredSrc && currentLoadedAudioMode !== mode) {
+                currentLoadedAudioMode = mode;
+                const wasPlaying = isPlaying;
+                htmlAudio.src = desiredSrc;
+                htmlAudio.currentTime = currentTime;
+                if (wasPlaying && !isMuted) {
+                    htmlAudio.play().catch(e => console.log('Audio play catch:', e));
+                }
+            }
         }
 
         let customAudio = null;
@@ -1573,9 +1603,11 @@
         function syncAudioPlayback() {
             initAudioContext();
             const mode = soundPreset.value;
-            if (mode === 'strauss') {
+
+            if (mode === 'peace_soul' || mode === 'whatsapp1' || mode === 'whatsapp2' || mode === 'strauss') {
                 stopSynth();
                 if (customAudio) customAudio.pause();
+                loadAudioSourceForMode(mode);
                 htmlAudio.currentTime = currentTime;
                 if (isPlaying && !isMuted) {
                     htmlAudio.play().catch(e => console.log('Audio play catch:', e));
