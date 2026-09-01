@@ -955,7 +955,8 @@
                             <span id="volumePercent" style="font-size:0.75rem; color:var(--gold-light); min-width:32px;">85%</span>
                         </div>
 
-                        <select class="audio-select" id="soundPreset">
+                                                <select class="audio-select" id="soundPreset">
+                            <option value="inspiring">🎬 Inspiring Cinematic (from 2:00)</option>
                             <option value="peace_soul">🕊️ Peace in the Soul (Gentle & Soft)</option>
                             <option value="whatsapp1">🌸 WhatsApp Gentle Audio 1</option>
                             <option value="whatsapp2">✨ WhatsApp Gentle Audio 2</option>
@@ -1347,7 +1348,9 @@
 
         function loadAudioSourceForMode(mode) {
             let desiredSrc = '';
-            if (mode === 'peace_soul') {
+            if (mode === 'inspiring') {
+                desiredSrc = window.INSPIRING_CINEMATIC_AUDIO_DATA || 'assets/inspiring-cinematic.mp3';
+            } else if (mode === 'peace_soul') {
                 desiredSrc = window.PEACE_IN_SOUL_AUDIO_DATA || 'assets/peace-in-the-soul.mp3';
             } else if (mode === 'whatsapp1') {
                 desiredSrc = window.WHATSAPP_AUDIO_1_DATA || 'assets/whatsapp-track-1.mp3';
@@ -1604,7 +1607,7 @@
             initAudioContext();
             const mode = soundPreset.value;
 
-            if (mode === 'peace_soul' || mode === 'whatsapp1' || mode === 'whatsapp2' || mode === 'strauss') {
+            if (mode === 'inspiring' || mode === 'peace_soul' || mode === 'whatsapp1' || mode === 'whatsapp2' || mode === 'strauss') {
                 stopSynth();
                 if (customAudio) customAudio.pause();
                 loadAudioSourceForMode(mode);
