@@ -2828,111 +2828,138 @@
         let selectedMimeType = 'video/webm';
         let recordStartTime = 0;
 
-        function getBestMimeType() {
-            const types = [
-                'video/mp4;codecs=avc1.42E01E,mp4a.40.2',
-                'video/mp4',
+        function getSupportedMimeTypes() {
+            const candidateTypes = [
                 'video/webm;codecs=vp9,opus',
                 'video/webm;codecs=vp8,opus',
-                'video/webm;codecs=h264',
-                'video/webm'
+                'video/webm;codecs=h264,opus',
+                'video/webm',
+                'video/mp4;codecs=avc1.42E01E,mp4a.40.2',
+                'video/mp4'
             ];
-            for (let t of types) {
+            const supported = [];
+            for (let t of candidateTypes) {
                 if (window.MediaRecorder && MediaRecorder.isTypeSupported(t)) {
-                    return t;
+                    supported.push(t);
                 }
             }
-            return 'video/webm';
+            return supported.length > 0 ? supported : ['video/webm'];
+        }
+
+        function createMediaRecorderSafe(stream) {
+            const types = getSupportedMimeTypes();
+            
+            for (let mime of types) {
+                try {
+                    const rec = new MediaRecorder(stream, {
+                        mimeType: mime,
+                        videoBitsPerSecond: 10000000,
+                        audioBitsPerSecond: 256000
+                    });
+                    selectedMimeType = mime;
+                    return rec;
+                } catch (err) {
+                    console.warn(`MediaRecorder init failed for ${mime}, trying next...`, err);
+                }
+            }
+
+            // Fallback with default options
+            selectedMimeType = 'video/webm';
+            return new MediaRecorder(stream);
         }
 
         function startRecording() {
-            initAudioContext();
-            if (audioCtx && audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            recordedChunks = [];
-
-            // 1. Capture 60fps canvas visual stream
-            const canvasStream = canvas.captureStream(60);
-
-            // 2. Capture Audio Track directly from Web Audio Destination Node
-            let tracksToRecord = [...canvasStream.getVideoTracks()];
-            if (audioDestNode && audioDestNode.stream) {
-                const aTracks = audioDestNode.stream.getAudioTracks();
-                if (aTracks.length > 0) {
-                    tracksToRecord.push(aTracks[0]);
-                }
-            }
-
-            const combinedStream = new MediaStream(tracksToRecord);
-
-            // 3. Select best supported MIME type
-            selectedMimeType = getBestMimeType();
-            const fileExt = selectedMimeType.includes('mp4') ? 'mp4' : 'webm';
-
-            const recorderOptions = {
-                mimeType: selectedMimeType,
-                videoBitsPerSecond: 10000000,
-                audioBitsPerSecond: 256000
-            };
-
             try {
-                mediaRecorder = new MediaRecorder(combinedStream, recorderOptions);
-            } catch (e) {
+                initAudioContext();
+                if (audioCtx && audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                recordedChunks = [];
+
+                // 1. Capture 60fps canvas visual stream
+                const canvasStream = canvas.captureStream(60);
+                let tracksToRecord = [...canvasStream.getVideoTracks()];
+
+                // 2. Capture Audio Track directly from Web Audio Destination Node
+                if (audioDestNode && audioDestNode.stream) {
+                    const aTracks = audioDestNode.stream.getAudioTracks();
+                    if (aTracks.length > 0) {
+                        tracksToRecord.push(aTracks[0]);
+                    }
+                }
+
+                const combinedStream = new MediaStream(tracksToRecord);
+
+                // 3. Create MediaRecorder with safe progressive fallback
+                mediaRecorder = createMediaRecorderSafe(combinedStream);
+
+                mediaRecorder.ondataavailable = (e) => {
+                    if (e.data && e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    recordingOverlay.classList.remove('active');
+                    recordBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg> Export Video (MP4/WebM)`;
+                    isRecording = false;
+
+                    if (recordedChunks.length === 0) {
+                        showToast('Recording ended with no frames captured.');
+                        return;
+                    }
+
+                    const actualMime = mediaRecorder.mimeType || selectedMimeType || 'video/webm';
+                    const isMp4 = actualMime.includes('mp4');
+                    const fileExt = isMp4 ? 'mp4' : 'webm';
+                    const filename = `Chakra_Energetics_Trailer_1080p.${fileExt}`;
+
+                    // Create clean blob and trigger download
+                    const blob = new Blob(recordedChunks, { type: actualMime });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+
+                    setTimeout(() => {
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    }, 2000);
+
+                    const sizeMb = (blob.size / (1024 * 1024)).toFixed(1);
+                    showToast(`🎉 Complete Trailer downloaded with Soundtrack (${sizeMb} MB) as ${filename}!`, 7000);
+                };
+
+                // Set recording state & display overlay
+                isRecording = true;
+                recordingOverlay.classList.add('active');
+                recordBtn.innerHTML = `🔴 Recording Active (0%)...`;
+                showToast('Recording started! Please keep this browser tab active to capture smooth 60fps frames.');
+
+                // Seek to 0, render frame, start recorder & play
+                seekToTime(0);
+                renderFrame();
+                recordStartTime = performance.now();
+
                 try {
-                    mediaRecorder = new MediaRecorder(combinedStream);
-                } catch (e2) {
-                    alert('Video recording is not supported in this browser. Please try Chrome, Edge, or Firefox.');
-                    return;
+                    mediaRecorder.start(250); // Collect slices every 250ms
+                } catch (startErr) {
+                    console.warn('mediaRecorder.start(250) failed, trying start() without timeslice:', startErr);
+                    mediaRecorder.start();
                 }
-            }
 
-            mediaRecorder.ondataavailable = (e) => {
-                if (e.data && e.data.size > 0) {
-                    recordedChunks.push(e.data);
-                }
-            };
-
-            mediaRecorder.onstop = () => {
+                playTrailer();
+            } catch (fatalErr) {
+                console.error('Fatal recording initialization error:', fatalErr);
+                isRecording = false;
                 recordingOverlay.classList.remove('active');
                 recordBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg> Export Video (MP4/WebM)`;
-                isRecording = false;
-
-                if (recordedChunks.length === 0) {
-                    showToast('Recording ended with no frames captured.');
-                    return;
-                }
-
-                // Create clean blob and trigger download
-                const blob = new Blob(recordedChunks, { type: selectedMimeType });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `Chakra_Energetics_Trailer_Complete_1080p.${fileExt}`;
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(() => {
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                }, 1000);
-
-                showToast(`🎉 Complete 7-Scene Trailer downloaded with Audio (${(blob.size / (1024*1024)).toFixed(1)} MB)!`, 6000);
-            };
-
-            // Set state and show overlay
-            isRecording = true;
-            recordingOverlay.classList.add('active');
-            recordBtn.innerHTML = `🔴 Recording Active (0%)...`;
-            showToast('Recording started! Please keep this browser tab visible to ensure smooth 60fps capture.');
-
-            // Seek to 0, render frame, start recorder & play
-            seekToTime(0);
-            renderFrame();
-            recordStartTime = performance.now();
-
-            mediaRecorder.start(250); // Collect slices every 250ms for low memory overhead
-            playTrailer();
+                alert('Recording error: ' + fatalErr.message + '\nPlease ensure your browser allows media recording.');
+            }
         }
 
         function stopRecording() {
@@ -2941,8 +2968,12 @@
                     mediaRecorder.requestData(); // Flush all pending video & audio chunks
                 } catch (e) {}
                 setTimeout(() => {
-                    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-                        mediaRecorder.stop();
+                    try {
+                        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                            mediaRecorder.stop();
+                        }
+                    } catch (err) {
+                        console.error('Error stopping recorder:', err);
                     }
                 }, 150);
             }
