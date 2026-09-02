@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600;1,700&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="assets/images_b64.js"></script>
     <script src="assets/strauss_audio_b64.js"></script>
     <script src="assets/whatsapp_audio_b64.js"></script>
     <style>
@@ -1100,17 +1101,28 @@
         let currentVolume = 0.85;
         let isMuted = false;
 
-        // Image Assets
+        // 100% Origin-Clean Image Assets (Loaded via Base64 Data URLs for error-free canvas recording)
+        const b64 = window.TRAILER_IMAGES_B64 || {};
+
         const imgFrontCover = new Image();
-        imgFrontCover.src = 'assets/chakra-energetics-front.jpg';
+        imgFrontCover.crossOrigin = "anonymous";
+        imgFrontCover.src = b64.FRONT_COVER || 'assets/chakra-energetics-front.jpg';
+
         const imgBackCover = new Image();
-        imgBackCover.src = 'assets/chakra-energetics-back.jpg';
+        imgBackCover.crossOrigin = "anonymous";
+        imgBackCover.src = b64.BACK_COVER || 'assets/chakra-energetics-back.jpg';
+
         const imgSpine = new Image();
-        imgSpine.src = 'assets/chakra-energetics-spine.jpg';
+        imgSpine.crossOrigin = "anonymous";
+        imgSpine.src = b64.SPINE || 'assets/chakra-energetics-spine.jpg';
+
         const imgStGermain = new Image();
-        imgStGermain.src = 'assets/st-germain-portrait.jpg';
+        imgStGermain.crossOrigin = "anonymous";
+        imgStGermain.src = b64.ST_GERMAIN || 'assets/st-germain-portrait.jpg';
+
         const imgSerapisBey = new Image();
-        imgSerapisBey.src = 'assets/serapis-bey-portrait.jpg';
+        imgSerapisBey.crossOrigin = "anonymous";
+        imgSerapisBey.src = b64.SERAPIS_BEY || 'assets/serapis-bey-portrait.jpg';
 
         // ========================================================
         // COMPLETE 13-CHAKRA SYSTEM DATA (PER AUTHOR'S PG61)
