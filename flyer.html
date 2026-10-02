@@ -679,6 +679,54 @@
                 margin: 0;
             }
         }
+    
+        /* Live Edit Mode & Visual Indicators */
+        body.edit-mode [data-editable] {
+            outline: 1.5px dashed rgba(212, 175, 55, 0.7) !important;
+            outline-offset: 3px;
+            border-radius: 3px;
+            cursor: text !important;
+            transition: all 0.2s ease;
+        }
+
+        body.edit-mode [data-editable]:hover {
+            outline: 1.5px dashed #ffd700 !important;
+            background: rgba(212, 175, 55, 0.12) !important;
+        }
+
+        body.edit-mode [data-editable]:focus {
+            outline: 2px solid #ffd700 !important;
+            background: rgba(212, 175, 55, 0.2) !important;
+        }
+
+        /* Edit Mode Hint Toast */
+        .edit-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(15, 20, 32, 0.95);
+            border: 1px solid var(--gold-primary);
+            color: #f3e5ab;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 200;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .edit-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
     </style>
 </head>
 <body>
@@ -689,15 +737,22 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             Video Trailer
         </a>
+        <button id="editToggleBtn" onclick="toggleEditMode()" style="background: rgba(212, 175, 55, 0.18); border-color: var(--gold-primary); color: var(--gold-light);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            ✏️ Edit Text
+        </button>
+        <button id="resetTextBtn" onclick="resetFlyerText()" style="display: none; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.5); color: #fca5a5;" title="Revert to original text">
+            ↺ Reset Text
+        </button>
         <button class="primary-action" onclick="window.print()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
             Print / Save as PDF (A5)
         </button>
         <button onclick="toggleTheme()">
-            🌓 Toggle Dark / Light Paper
+            🌓 Dark / Light
         </button>
         <button onclick="toggleBleed()">
-            📐 Bleed & Crop Guides
+            📐 Bleed Guides
         </button>
     </header>
 
@@ -727,16 +782,16 @@
 
             <!-- 1. Header & Identity -->
             <header class="flyer-header">
-                <div class="kicker">Ancient Wisdom for Modern Awakening</div>
+                <div class="kicker" data-editable="kicker">Ancient Wisdom for Modern Awakening</div>
                 <div class="ornament-line">
                     <span class="ornament-diamond">✦</span>
                 </div>
                 <div class="title-block">
-                    <div class="book-title-main">CHAKRA</div>
-                    <div class="book-title-gold">ENERGETICS</div>
+                    <div class="book-title-main" data-editable="title_main">CHAKRA</div>
+                    <div class="book-title-gold" data-editable="title_gold">ENERGETICS</div>
                 </div>
-                <div class="subtitle-banner">Interactive Human Energy System</div>
-                <div class="author-signature">by Eliza James</div>
+                <div class="subtitle-banner" data-editable="subtitle">Interactive Human Energy System</div>
+                <div class="author-signature" data-editable="author">by Eliza James</div>
             </header>
 
             <!-- 2. Visual Centerpiece: 3D Hardcover Book & Masters Medallions -->
@@ -746,8 +801,8 @@
                     <div class="medallion-frame">
                         <img src="assets/st-germain-portrait.jpg" alt="St Germain Portrait">
                     </div>
-                    <div class="master-name">ST GERMAIN</div>
-                    <div class="master-title">Inner Wisdom</div>
+                    <div class="master-name" data-editable="master_1_name">ST GERMAIN</div>
+                    <div class="master-title" data-editable="master_1_title">Inner Wisdom</div>
                 </div>
 
                 <!-- 3D Hardcover Book Mockup -->
@@ -762,37 +817,37 @@
                     <div class="medallion-frame">
                         <img src="assets/serapis-bey-portrait.jpg" alt="Serapis Bey Portrait">
                     </div>
-                    <div class="master-name">SERAPIS BEY</div>
-                    <div class="master-title">Ancient Wisdom</div>
+                    <div class="master-name" data-editable="master_2_name">SERAPIS BEY</div>
+                    <div class="master-title" data-editable="master_2_title">Ancient Wisdom</div>
                 </div>
             </section>
 
-            <div class="masters-caption">
+            <div class="masters-caption" data-editable="masters_caption">
                 Teachers of Ancient &amp; Inner Wisdom • Direct Channeled Guidance
             </div>
 
             <!-- 3. Core Insights & Features (5 Bullet Points) -->
             <section class="bullets-section">
-                <div class="section-label">Key Revelations Inside The Book</div>
+                <div class="section-label" data-editable="section_label">Key Revelations Inside The Book</div>
                 <div class="bullet-item">
                     <span class="bullet-icon">✦</span>
-                    <div class="bullet-text"><strong>The Male &amp; Female Energy Systems</strong> — Dynamic balance of polarity and vitality.</div>
+                    <div class="bullet-text" data-editable="bullet_1"><strong>The Male &amp; Female Energy Systems</strong> — Dynamic balance of polarity and vitality.</div>
                 </div>
                 <div class="bullet-item">
                     <span class="bullet-icon">✦</span>
-                    <div class="bullet-text"><strong>The Development of the Human Entity</strong> — The sacred genesis from incarnate vessel to light.</div>
+                    <div class="bullet-text" data-editable="bullet_2"><strong>The Development of the Human Entity</strong> — The sacred genesis from incarnate vessel to light.</div>
                 </div>
                 <div class="bullet-item">
                     <span class="bullet-icon">✦</span>
-                    <div class="bullet-text"><strong>The Complete 13-Chakra Energetic System Revealed</strong> — Physical &amp; multidimensional alignment.</div>
+                    <div class="bullet-text" data-editable="bullet_3"><strong>The Complete 13-Chakra Energetic System Revealed</strong> — Physical &amp; multidimensional alignment.</div>
                 </div>
                 <div class="bullet-item">
                     <span class="bullet-icon">✦</span>
-                    <div class="bullet-text"><strong>The Vastness of Dimensional Consciousness</strong> — Expanding awareness into higher frequencies.</div>
+                    <div class="bullet-text" data-editable="bullet_4"><strong>The Vastness of Dimensional Consciousness</strong> — Expanding awareness into higher frequencies.</div>
                 </div>
                 <div class="bullet-item">
                     <span class="bullet-icon">✦</span>
-                    <div class="bullet-text"><strong>Ascended Master Channeling &amp; Ancient Wisdom</strong> — Authentic teachings for planetary transformation.</div>
+                    <div class="bullet-text" data-editable="bullet_5"><strong>Ascended Master Channeling &amp; Ancient Wisdom</strong> — Authentic teachings for planetary transformation.</div>
                 </div>
             </section>
 
@@ -801,10 +856,10 @@
             <!-- 4. Footer & Ordering Call to Action -->
             <footer class="flyer-footer">
                 <div class="cta-col">
-                    <div class="worldwide-tag">Now Available Worldwide</div>
-                    <div class="retailers-line">ORDER ON AMAZON &amp; MY OFFICIAL WEBSITE</div>
-                    <div class="formats-line">Available in Paperback &amp; eBook Editions &bull; Tracked Door-to-Door Delivery</div>
-                    <div class="author-signoff">
+                    <div class="worldwide-tag" data-editable="worldwide_tag">Now Available Worldwide</div>
+                    <div class="retailers-line" data-editable="retailers_line">ORDER ON AMAZON &amp; MY OFFICIAL WEBSITE</div>
+                    <div class="formats-line" data-editable="formats_line">Available in Paperback &amp; eBook Editions &bull; Tracked Door-to-Door Delivery</div>
+                    <div class="author-signoff" data-editable="author_signoff">
                         <span>✦ Eliza James</span>
                         <span>•</span>
                         <span>Order Direct: www.elizareconnection.co.za</span>
@@ -816,7 +871,7 @@
                     <a href="https://elizareconnection.co.za/books.html" target="_blank" style="text-decoration:none;" class="qr-badge-inner" title="Click or Scan to Order Direct">
                         <img src="assets/qr-code.png" alt="Scan QR Code to Order on My Website">
                     </a>
-                    <div class="qr-caption">Scan To Order<br>On My Website</div>
+                    <div class="qr-caption" data-editable="qr_caption">Scan To Order<br>On My Website</div>
                 </div>
             </footer>
         </main>
@@ -830,6 +885,122 @@
         function toggleBleed() {
             document.body.classList.toggle('show-bleed');
         }
+
+        // ========================================================
+        // IN-PLACE LIVE TEXT EDITOR ENGINE WITH LOCAL STORAGE
+        // ========================================================
+        const STORAGE_KEY = 'chakra_flyer_custom_text_v1';
+        let isEditMode = false;
+        const defaultData = {};
+
+        // Capture initial default HTML templates
+        document.querySelectorAll('[data-editable]').forEach(el => {
+            const key = el.getAttribute('data-editable');
+            defaultData[key] = el.innerHTML.trim();
+        });
+
+        function loadSavedEdits() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    let hasCustomEdits = false;
+                    document.querySelectorAll('[data-editable]').forEach(el => {
+                        const key = el.getAttribute('data-editable');
+                        if (parsed[key] !== undefined && parsed[key] !== defaultData[key]) {
+                            el.innerHTML = parsed[key];
+                            hasCustomEdits = true;
+                        }
+                    });
+                    if (hasCustomEdits) {
+                        const resetBtn = document.getElementById('resetTextBtn');
+                        if (resetBtn) resetBtn.style.display = 'inline-flex';
+                    }
+                }
+            } catch (e) {
+                console.warn('Error reading saved flyer edits:', e);
+            }
+        }
+
+        function saveEdits() {
+            try {
+                const data = {};
+                document.querySelectorAll('[data-editable]').forEach(el => {
+                    const key = el.getAttribute('data-editable');
+                    data[key] = el.innerHTML.trim();
+                });
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                const resetBtn = document.getElementById('resetTextBtn');
+                if (resetBtn) resetBtn.style.display = 'inline-flex';
+            } catch (e) {
+                console.warn('Error saving flyer edits:', e);
+            }
+        }
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            document.body.classList.toggle('edit-mode', isEditMode);
+            const btn = document.getElementById('editToggleBtn');
+
+            document.querySelectorAll('[data-editable]').forEach(el => {
+                el.contentEditable = isEditMode ? 'true' : 'false';
+                if (isEditMode) {
+                    el.addEventListener('input', saveEdits);
+                    el.addEventListener('blur', () => {
+                        saveEdits();
+                        showToast('✨ Text changes auto-saved!');
+                    });
+                }
+            });
+
+            if (isEditMode) {
+                btn.innerHTML = '✅ Done Editing';
+                btn.style.background = 'var(--gold-gradient)';
+                btn.style.color = '#0b0c10';
+                showToast('✏️ Edit Mode ON: Click any text directly on the flyer to customize it!');
+            } else {
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> ✏️ Edit Text';
+                btn.style.background = 'rgba(212, 175, 55, 0.18)';
+                btn.style.color = 'var(--gold-light)';
+                saveEdits();
+                showToast('💾 Edits saved! You can now Print / Save as PDF.');
+            }
+        }
+
+        function resetFlyerText() {
+            if (confirm('Are you sure you want to revert all text back to the original flyer defaults?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                document.querySelectorAll('[data-editable]').forEach(el => {
+                    const key = el.getAttribute('data-editable');
+                    if (defaultData[key]) {
+                        el.innerHTML = defaultData[key];
+                    }
+                });
+                const resetBtn = document.getElementById('resetTextBtn');
+                if (resetBtn) resetBtn.style.display = 'none';
+                showToast('↺ Restored original default text!');
+            }
+        }
+
+        function showToast(msg) {
+            let toast = document.getElementById('editToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'editToast';
+                toast.className = 'edit-toast';
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = msg;
+            toast.classList.add('show');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // Hydrate saved edits on load
+        loadSavedEdits();
+
     </script>
 </body>
 </html>
