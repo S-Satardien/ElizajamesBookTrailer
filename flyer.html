@@ -785,14 +785,13 @@
            DESIGN OPTION 2: COSMIC NEBULA & MEDITATING AVATAR
            ======================================================== */
         .a5-flyer.show-opt2 {
-            background: #060918;
-            background-image: 
-                radial-gradient(circle at 50% 32%, rgba(120, 45, 205, 0.42) 0%, transparent 58%),
-                radial-gradient(circle at 20% 25%, rgba(35, 75, 195, 0.35) 0%, transparent 50%),
-                radial-gradient(circle at 80% 25%, rgba(65, 35, 185, 0.35) 0%, transparent 50%),
-                radial-gradient(circle at 50% 80%, rgba(15, 25, 75, 0.7) 0%, transparent 65%),
-                radial-gradient(circle at 50% 12%, rgba(212, 175, 55, 0.12) 0%, transparent 50%);
-            box-shadow: 0 30px 70px rgba(0,0,0,0.95), 0 0 50px rgba(120, 45, 205, 0.3), 0 0 0 1px rgba(212, 175, 55, 0.4);
+            background: #060918 url('assets/cosmic-nebula-bg.jpg') center center / cover no-repeat;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.95), 0 0 50px rgba(120, 45, 205, 0.35), 0 0 0 1px rgba(212, 175, 55, 0.45);
+        }
+
+        /* In Option 2, hide the watermark since the nebula background already has high-res sacred geometry */
+        .a5-flyer.show-opt2 .bg-watermark {
+            display: none;
         }
 
         /* Option 2 Header */
@@ -850,11 +849,22 @@
             gap: 1mm;
         }
 
+        .showcase-opt2 {
+            position: relative;
+            z-index: 5;
+            display: grid;
+            grid-template-columns: 30mm 45mm 30mm;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5mm;
+            margin: 1.5mm 0 1mm;
+        }
+
         .ornate-frame-img {
-            width: 28mm;
-            height: 33mm;
+            width: 30mm;
+            height: 36mm;
             object-fit: contain;
-            filter: drop-shadow(0 4px 14px rgba(0,0,0,0.85)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
+            filter: drop-shadow(0 6px 16px rgba(0,0,0,0.9)) drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
             transition: transform 0.3s ease;
         }
 
@@ -864,12 +874,14 @@
 
         .ornate-caption {
             font-family: 'Cinzel', serif;
-            font-size: 1.85mm;
+            font-size: 1.95mm;
             font-weight: 700;
-            color: #f7e5b5;
-            letter-spacing: 0.6px;
+            color: #fce7b0;
+            letter-spacing: 0.8px;
             line-height: 1.15;
             text-transform: uppercase;
+            text-shadow: 0 0 8px rgba(0,0,0,0.9);
+            margin-top: 0.5mm;
         }
 
         .avatar-center-wrapper {
@@ -880,10 +892,10 @@
         }
 
         .avatar-img {
-            width: 44mm;
+            width: 45mm;
             height: 48mm;
             object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(142, 68, 173, 0.6)) drop-shadow(0 0 35px rgba(52, 152, 219, 0.45));
+            filter: drop-shadow(0 0 25px rgba(168, 85, 247, 0.75)) drop-shadow(0 0 45px rgba(56, 189, 248, 0.55));
             transition: transform 0.3s ease;
         }
 
@@ -1245,18 +1257,18 @@
                 <section class="showcase-opt2">
                     <!-- St Germain in Ornate Baroque Oval Frame -->
                     <div class="ornate-master">
-                        <img src="assets/st-germain-ornate.png" alt="St Germain Ornate Portrait" class="ornate-frame-img">
+                        <img src="assets/st-germain-baroque-gold.png" alt="St Germain Ornate Portrait" class="ornate-frame-img">
                         <div class="ornate-caption" data-editable="opt2_st_caption">ST. GERMAIN &bull; Inner Wisdom</div>
                     </div>
 
                     <!-- Luminous Meditating Chakra Silhouette -->
                     <div class="avatar-center-wrapper">
-                        <img src="assets/cosmic-chakra-avatar.png" alt="Cosmic Human Energy Avatar" class="avatar-img">
+                        <img src="assets/chakra-avatar-custom.png" alt="Cosmic Human Energy Avatar" class="avatar-img">
                     </div>
 
                     <!-- Serapis Bey in Ornate Baroque Oval Frame -->
                     <div class="ornate-master">
-                        <img src="assets/serapis-bey-ornate.png" alt="Serapis Bey Ornate Portrait" class="ornate-frame-img">
+                        <img src="assets/serapis-bey-baroque-gold.png" alt="Serapis Bey Ornate Portrait" class="ornate-frame-img">
                         <div class="ornate-caption" data-editable="opt2_serapis_caption">SERAPIS BEY &bull; Ancient Wisdom</div>
                     </div>
                 </section>
