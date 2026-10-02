@@ -395,7 +395,16 @@
             font-style: italic;
         }
 
-        /* Clean High-Clarity Book Picture (Option 1) */
+        /* Clean Hero Book Showcase (Option 1 - Single Focus) */
+        .showcase-row-single {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2mm 0 1.2mm;
+        }
+
         .book-picture-wrapper {
             display: flex;
             justify-content: center;
@@ -403,27 +412,27 @@
         }
 
         .book-picture-frame {
-            width: 41mm;
-            height: 58mm;
+            width: 48mm;
+            height: 68mm;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            border-radius: 1.5mm;
+            border-radius: 1.8mm;
             box-shadow: 
-                0 10px 24px rgba(0, 0, 0, 0.85),
-                0 0 16px rgba(212, 175, 55, 0.3);
-            border: 1.2px solid rgba(212, 175, 55, 0.65);
+                0 12px 30px rgba(0, 0, 0, 0.9),
+                0 0 22px rgba(212, 175, 55, 0.35);
+            border: 1.2px solid rgba(212, 175, 55, 0.7);
             background: #0f1422;
             overflow: hidden;
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .book-picture-frame:hover {
-            transform: translateY(-1mm);
+            transform: translateY(-1.2mm);
             box-shadow: 
-                0 14px 28px rgba(0, 0, 0, 0.9),
-                0 0 22px rgba(212, 175, 55, 0.45);
+                0 16px 36px rgba(0, 0, 0, 0.95),
+                0 0 28px rgba(212, 175, 55, 0.45);
         }
 
         .book-picture-img {
@@ -1156,31 +1165,12 @@
                 <div class="author-signature" data-editable="author">by Eliza James</div>
             </header>
 
-            <!-- 2. Visual Centerpiece: 3D Hardcover Book & Masters Medallions -->
-            <section class="showcase-row">
-                <!-- St Germain Medallion -->
-                <div class="master-medallion">
-                    <div class="medallion-frame">
-                        <img src="assets/st-germain-portrait-hd.png" alt="St Germain Portrait">
-                    </div>
-                    <div class="master-name" data-editable="master_1_name">ST GERMAIN</div>
-                    <div class="master-title" data-editable="master_1_title">Inner Wisdom</div>
-                </div>
-
-                <!-- High-Clarity Book Picture (Option 1) -->
+            <!-- 2. Visual Centerpiece: Hero Book Feature (Clean Single Focus) -->
+            <section class="showcase-row-single">
                 <div class="book-picture-wrapper">
                     <div class="book-picture-frame">
-                        <img src="assets/chakra-energetics-book-clear.png" alt="Chakra Energetics Book Cover" class="book-picture-img">
+                        <img src="assets/chakra-energetics-book-clean.png" alt="Chakra Energetics Book Cover" class="book-picture-img">
                     </div>
-                </div>
-
-                <!-- Serapis Bey Medallion -->
-                <div class="master-medallion">
-                    <div class="medallion-frame">
-                        <img src="assets/serapis-bey-portrait-hd.png" alt="Serapis Bey Portrait">
-                    </div>
-                    <div class="master-name" data-editable="master_2_name">SERAPIS BEY</div>
-                    <div class="master-title" data-editable="master_2_title">Ancient Wisdom</div>
                 </div>
             </section>
 
