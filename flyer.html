@@ -606,18 +606,29 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1mm;
-            background: rgba(15, 20, 32, 0.9);
+            gap: 1.2mm;
+            background: rgba(15, 20, 32, 0.92);
             border: 1px solid var(--border-gold);
-            border-radius: 2mm;
-            padding: 1.6mm;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            border-radius: 2.2mm;
+            padding: 1.8mm;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 10px rgba(212, 175, 55, 0.25);
+        }
+
+        .qr-badge-inner {
+            background: #ffffff;
+            border-radius: 1.5mm;
+            padding: 1mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.6);
         }
 
         .qr-col img {
-            width: 17mm;
-            height: 17mm;
-            border-radius: 1mm;
+            width: 16.5mm;
+            height: 16.5mm;
+            border-radius: 0.8mm;
             display: block;
         }
 
@@ -790,7 +801,7 @@
             <footer class="flyer-footer">
                 <div class="cta-col">
                     <div class="worldwide-tag">Now Available Worldwide</div>
-                    <div class="retailers-line">ORDER ON AMAZON &amp; HER OFFICIAL WEBSITE</div>
+                    <div class="retailers-line">ORDER ON AMAZON &amp; MY OFFICIAL WEBSITE</div>
                     <div class="formats-line">Available in Paperback &amp; eBook Editions &bull; Tracked Door-to-Door Delivery</div>
                     <div class="author-signoff">
                         <span>✦ Eliza James</span>
@@ -801,10 +812,10 @@
 
                 <!-- QR Code Link to Website Order Page -->
                 <div class="qr-col">
-                    <a href="https://elizareconnection.co.za/books.html" target="_blank" style="text-decoration:none;">
-                        <img src="assets/qr-code.png" alt="Scan QR Code to Order on Website">
+                    <a href="https://elizareconnection.co.za/books.html" target="_blank" style="text-decoration:none;" class="qr-badge-inner" title="Click or Scan to Order Direct">
+                        <img src="assets/qr-code.png" alt="Scan QR Code to Order on My Website">
                     </a>
-                    <div class="qr-caption">Scan To Order<br>On Her Website</div>
+                    <div class="qr-caption">Scan To Order<br>On My Website</div>
                 </div>
             </footer>
         </main>
