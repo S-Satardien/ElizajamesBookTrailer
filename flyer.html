@@ -403,12 +403,18 @@
         }
 
         .book-3d-container {
-            width: 44mm;
-            height: 58mm;
+            width: 44.5mm;
+            height: 59mm;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            transform: perspective(700px) rotateY(-4deg) rotateX(2deg);
+            transition: transform 0.35s ease;
+        }
+
+        .book-3d-container:hover {
+            transform: perspective(700px) rotateY(-8deg) rotateX(3deg) translateY(-0.8mm);
         }
 
         .book-hd-img {
@@ -416,14 +422,9 @@
             height: 100%;
             object-fit: contain;
             display: block;
-            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 14px rgba(212, 175, 55, 0.3));
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 14px rgba(212, 175, 55, 0.28));
             image-rendering: -webkit-optimize-contrast;
             image-rendering: high-quality;
-            transition: transform 0.3s ease;
-        }
-
-        .book-hd-img:hover {
-            transform: scale(1.02);
         }
 
         /* Masters Banner */
@@ -818,7 +819,7 @@
                 <!-- 3D Hardcover Book Mockup (Pre-rendered 300 DPI HD Image) -->
                 <div class="book-mockup-wrapper">
                     <div class="book-3d-container">
-                        <img src="assets/chakra-energetics-3d-mockup.png" alt="Chakra Energetics 3D Book Mockup" class="book-hd-img">
+                        <img src="assets/chakra-energetics-3d-tilted.png" alt="Chakra Energetics 3D Book Mockup" class="book-hd-img">
                     </div>
                 </div>
 
