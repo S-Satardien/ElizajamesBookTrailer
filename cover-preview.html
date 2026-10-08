@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eliza James · Book Cover Redesign Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold-primary: #D4AF37;
+      --gold-light: #F7E7A9;
+      --gold-dark: #997A15;
+      --bg-dark: #0D1117;
+      --bg-card: rgba(22, 27, 34, 0.75);
+      --border-glass: rgba(212, 175, 55, 0.25);
+      --text-main: #F0F6FC;
+      --text-muted: #8B949E;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #1a2332 0%, #0d1117 75%, #05070a 100%);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-glass);
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--gold-light) 70%, var(--gold-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Comparison Grid */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+      margin-bottom: 56px;
+    }
+
+    .design-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+    }
+
+    .design-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212, 175, 55, 0.55);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.15);
+    }
+
+    .badge-corner {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #000;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 2;
+    }
+
+    .card-preview {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 480px;
+      position: relative;
+    }
+
+    .card-preview img {
+      max-width: 100%;
+      max-height: 460px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease;
+      cursor: zoom-in;
+    }
+
+    .card-preview img:hover {
+      transform: scale(1.02);
+    }
+
+    .card-content {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .specs-pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .spec-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: #c9d1d9;
+    }
+
+    .action-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      gap: 8px;
+      border: none;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+      color: #121008;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #fff, var(--gold-light));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+
+    /* Source Reference Row */
+    .source-section {
+      background: rgba(22, 27, 34, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 32px;
+      margin-bottom: 48px;
+    }
+
+    .source-header {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      margin-bottom: 18px;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .source-card {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .source-card img {
+      max-height: 220px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      object-fit: cover;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+    }
+
+    .source-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Modal for inspection */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5, 7, 10, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      max-height: 88vh;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.3);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      background: var(--gold-primary);
+      color: #000;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.4rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="eyebrow">Publication 02 Redesign · High-Fidelity 300 DPI</span>
+      <h1>A Most Extraordinary Journey of Self-Discovery</h1>
+      <p class="subtitle">
+        Per your request, we swapped the stacked stones and cold ocean background with Eliza's joyful freedom photo on the beach, while meticulously preserving the embossed gold typography and fluid cursive script.
+      </p>
+    </header>
+
+    <!-- Design Choices -->
+    <div class="comparison-grid">
+
+      <!-- Option 1: Golden Dawn -->
+      <div class="design-card">
+        <span class="badge-corner">Option 1 · Spiritual Dawn</span>
+        <div class="card-preview">
+          <img src="assets/extraordinary-journey-cover-golden.jpg" 
+               alt="Golden Dawn Book Cover" 
+               onclick="openModal(this.src, 'Option 1: Golden Dawn Edition')"
+               title="Click to Zoom Fullscreen">
+        </div>
+        <div class="card-content">
+          <h2 class="card-title">Golden Dawn Edition</h2>
+          <p class="card-desc">
+            Features radiant golden sunlight bursting through heavenly clouds, casting a warm spiritual glow over Eliza as she walks triumphantly on the shore. Warm golden sand, perfect harmony with the gold embossed title.
+          </p>
+          <div class="specs-pill-group">
+            <span class="spec-pill">2000 × 3000 Px</span>
+            <span class="spec-pill">300 DPI Print-Ready</span>
+            <span class="spec-pill">Stones Removed</span>
+            <span class="spec-pill">Gold 3D Typography</span>
+          </div>
+          <div class="action-group">
+            <a href="assets/extraordinary-journey-cover-golden.png" download="Extraordinary-Journey-Cover-Golden-300DPI.png" class="btn btn-gold">
+              ⬇ Download PNG
+            </a>
+            <a href="assets/extraordinary-journey-cover-golden.jpg" download="Extraordinary-Journey-Cover-Golden-300DPI.jpg" class="btn btn-outline">
+              ⬇ Download JPG
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 2: Azure Horizon -->
+      <div class="design-card">
+        <span class="badge-corner">Option 2 · Azure Horizon</span>
+        <div class="card-preview">
+          <img src="assets/extraordinary-journey-cover-azure.jpg" 
+               alt="Azure Horizon Book Cover" 
+               onclick="openModal(this.src, 'Option 2: Azure Horizon Edition')"
+               title="Click to Zoom Fullscreen">
+        </div>
+        <div class="card-content">
+          <h2 class="card-title">Azure Horizon Edition</h2>
+          <p class="card-desc">
+            Faithfully honors the original book's brilliant cerulean blue sky and turquoise ocean palette, replacing the stones with Eliza's radiant beach walk. High contrast, crisp coastal clarity, and gold lettering.
+          </p>
+          <div class="specs-pill-group">
+            <span class="spec-pill">2000 × 3000 Px</span>
+            <span class="spec-pill">300 DPI Print-Ready</span>
+            <span class="spec-pill">Original Sky Palette</span>
+            <span class="spec-pill">Turquoise Ocean</span>
+          </div>
+          <div class="action-group">
+            <a href="assets/extraordinary-journey-cover-azure.png" download="Extraordinary-Journey-Cover-Azure-300DPI.png" class="btn btn-gold">
+              ⬇ Download PNG
+            </a>
+            <a href="assets/extraordinary-journey-cover-azure.jpg" download="Extraordinary-Journey-Cover-Azure-300DPI.jpg" class="btn btn-outline">
+              ⬇ Download JPG
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Original Reference Assets -->
+    <div class="source-section">
+      <div class="source-header">
+        <span>✦</span> Transformation Source References
+      </div>
+      <div class="source-grid">
+        <div class="source-card">
+          <img src="assets/journey-self-discovery-original-cover.png" alt="Original Book Cover">
+          <div class="source-label">Original Cover (Zen Stones &amp; Ocean)</div>
+        </div>
+        <div class="source-card">
+          <img src="assets/eliza-beach-freedom.jpg" alt="Eliza Beach Freedom Photo">
+          <div class="source-label">Eliza's Authentic Beach Photo (Raw Input)</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Eliza James · Ascended Master Teachings · Ready for Print &amp; Digital Publishing</p>
+    </footer>
+  </div>
+
+  <!-- Inspection Modal -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <img id="modalImg" src="" alt="Fullscreen inspection">
+    </div>
+  </div>
+
+  <script>
+    function openModal(src, title) {
+      const modal = document.getElementById('imageModal');
+      const img = document.getElementById('modalImg');
+      img.src = src;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
