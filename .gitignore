@@ -6,7 +6,8 @@ node_modules/
 scratch/
 
 # Temporary video render tests & scratch audio
-/assets/eliza_james_cinematic_masterpiece_*.mp4
+/assets/eliza_james_cinematic_masterpiece_v2.mp4
+/assets/eliza_james_cinematic_masterpiece_v3.mp4
 /assets/eliza_james_masterpiece_trailer.mp4
 /assets/3d_spinning_hardcover_book.mp4
 /assets/premiere_assets/
